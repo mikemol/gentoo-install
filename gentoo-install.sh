@@ -317,11 +317,17 @@ script_emerge_post() {
     # tried to order them in a minimal-risk fashion.
 
     # Clean up anything which got broken by the emerge.
-    logger "Gentoo install: python updater"
-    python-updater
+    hash python-updater 2> /dev/null
+    if [[ $? -eq 0 ]]; then
+        logger "Gentoo install: python updater"
+        python-updater
+    fi
 
-    logger "Gentoo install: perl updater"
-    perl-cleaner --reallyall
+    hash python-updater 2> /dev/null
+    if [[ $? -eq 0 ]]; then
+        logger "Gentoo install: perl updater"
+        perl-cleaner --reallyall
+    fi
 
     logger "Gentoo install: revdep-rebuild"
     revdep-rebuild
