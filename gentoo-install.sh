@@ -212,7 +212,7 @@ FS_ROOT_UUID="$1"
 FS_BOOT_UUID="$2"
 FS_SWAP_UUID="$3"
 FS_HOME_UUID="$4"
-SYS_HOSTNAME="$5"
+ECT_CONFD_HOSTNAME="$5"
 ETC_CONFD_NET_FILE_CONTENT="$6"
 http_proxy="$7"
 
@@ -260,7 +260,7 @@ script_write_fstab() {
 script_conf_hostname() {
     logger "Gentoo install: setting hostname"
     # Set the system hostname
-    echo "hostname=\"$SYS_HOSTNAME\"" > /etc/conf.d/hostname
+    echo "hostname=\"$ETC_CONFD_HOSTNAME\"" > /etc/conf.d/hostname
 }
 
 script_conf_net() {
@@ -448,7 +448,7 @@ echo "$INNER_SCRIPT" > /mnt/gentoo/chroot_inner_script.sh
 echo "Running chroot script"
 
 # and run it. Wish us luck!
-chroot /mnt/gentoo/ /bin/bash /chroot_inner_script.sh "$FS_ROOT_UUID" "$FS_BOOT_UUID" "$FS_SWAP_UUID" "$FS_HOME_UUID" "$SYS_HOSTNAME" "$ETC_CONFD_NET_FILE_CONTENT" "$http_proxy"
+chroot /mnt/gentoo/ /bin/bash /chroot_inner_script.sh "$FS_ROOT_UUID" "$FS_BOOT_UUID" "$FS_SWAP_UUID" "$FS_HOME_UUID" "$ETC_CONFD_HOSTNAME" "$ETC_CONFD_NET_FILE_CONTENT" "$http_proxy"
 
 if [[ $? -ne 0 ]]; then
     echo "chroot install script failed. Read output, collect logs, submit bugs..."
