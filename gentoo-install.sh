@@ -272,10 +272,10 @@ script_conf_net() {
 script_conf_locale_gen_write() {
     logger "Writing and generating locales"
     # Clear out initial file.
-    echo '' > /etc/locale.gen
+    echo '' > /etc/locales.gen
 
-    echo "en_US ISO-8859-1" >> /etc/locale.gen
-    echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
+    echo "en_US ISO-8859-1" >> /etc/locales.gen
+    echo "en_US.UTF-8 UTF-8" >> /etc/locales.gen
 }
 
 script_conf_locales_select() {
