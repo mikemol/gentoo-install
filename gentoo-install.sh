@@ -77,6 +77,8 @@ FS_ROOT_UUID=""
 
 ETC_CONFD_HOSTNAME="inara"
 
+ETC_TIMEZONE="America/Detroit"
+
 read -r -d '' ETC_CONFD_NET_FILE_CONTENT <<'EOF'
 config_eth0="dhcp"
 EOF
@@ -179,6 +181,9 @@ tar xjpf "$PORTAGE_SNAPSHOT" -C /mnt/gentoo/usr
 logger "Gentoo install: Unpacking make.conf."
 
 echo "$MAKE_CONF" > /mnt/gentoo/etc/make.conf
+
+logger "Gentoo install: Writing timezone configuration"
+echo "$ETC_TIMEZONE" > /mnt/gentoo/etc/timezone
 
 logger "Gentoo install: Adding rsync mirror"
 echo "SYNC=$SYNC" >> /mnt/gentoo/etc/make.conf
