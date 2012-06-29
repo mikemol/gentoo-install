@@ -79,6 +79,8 @@ ETC_CONFD_HOSTNAME="inara"
 
 ETC_TIMEZONE="America/Detroit"
 
+KERNEL_SOURCE="sys-kernel/gentoo-sources"
+
 read -r -d '' ETC_CONFD_NET_FILE_CONTENT <<'EOF'
 config_eth0="dhcp"
 EOF
@@ -220,6 +222,7 @@ FS_HOME_UUID="$4"
 ECT_CONFD_HOSTNAME="$5"
 ETC_CONFD_NET_FILE_CONTENT="$6"
 http_proxy="$7"
+KERNEL_SOURCES="$8"
 
 script_fail() {
     logger "Gentoo install: Failing out"
@@ -421,6 +424,9 @@ script_emerge app-portage/gentoolkit
 
 script_emerge_portage_update
 
+logger "Gentoo install: Installing kernel-sources"
+emerge $KERNEL_SOURCES
+
 script_emerge_update_world
 
 # Since we're rebasing the system with new CFLAGS, and _then_ rebuilding
@@ -453,7 +459,7 @@ echo "$INNER_SCRIPT" > /mnt/gentoo/chroot_inner_script.sh
 echo "Running chroot script"
 
 # and run it. Wish us luck!
-chroot /mnt/gentoo/ /bin/bash /chroot_inner_script.sh "$FS_ROOT_UUID" "$FS_BOOT_UUID" "$FS_SWAP_UUID" "$FS_HOME_UUID" "$ETC_CONFD_HOSTNAME" "$ETC_CONFD_NET_FILE_CONTENT" "$http_proxy"
+chroot /mnt/gentoo/ /bin/bash /chroot_inner_script.sh "$FS_ROOT_UUID" "$FS_BOOT_UUID" "$FS_SWAP_UUID" "$FS_HOME_UUID" "$ETC_CONFD_HOSTNAME" "$ETC_CONFD_NET_FILE_CONTENT" "$http_proxy" "$KERNEL_SOURCES"
 
 if [[ $? -ne 0 ]]; then
     echo "chroot install script failed. Read output, collect logs, submit bugs..."
