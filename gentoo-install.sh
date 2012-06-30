@@ -64,7 +64,7 @@ STAGE_BALL=stage3-amd64-20120621.tar.bz2
 PORTAGE_SNAPSHOT=portage-latest.tar.bz2
 
 #Root filesystem device
-ROOTDEV=/dev/md0
+ROOTDEV=/dev/md127
 
 #Boot filesystem UUID
 FS_BOOT_UUID=3d43226b-ff73-4369-829c-bd5cf90b3063
