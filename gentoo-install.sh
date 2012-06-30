@@ -455,7 +455,7 @@ rc-update add vixie-cron default
 rc-update add ssh default
 
 # And not-so-necessary-but-oh-so-nice tools.
-script_emerge app-admin/genlop sys-process/htop app-editors/vim
+script_emerge app-admin/genlop sys-process/htop app-editors/vim app-portage/eix
 
 echo "SUCCESS!"
 INNERSCRIPT
