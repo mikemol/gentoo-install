@@ -79,7 +79,7 @@ ETC_CONFD_HOSTNAME="inara"
 
 ETC_TIMEZONE="America/Detroit"
 
-KERNEL_SOURCE="sys-kernel/gentoo-sources"
+KERNEL_SOURCES="sys-kernel/gentoo-sources"
 
 read -r -d '' ETC_CONFD_NET_FILE_CONTENT <<'EOF'
 config_eth0="dhcp"
