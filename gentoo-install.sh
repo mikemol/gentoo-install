@@ -389,7 +389,7 @@ script_emerge_rebuild_world() {
 
 script_emerge() {
     logger "Gentoo install: emerging $*"
-    emerge "$*"
+    emerge $*
     script_emerge_retry
 }
 
