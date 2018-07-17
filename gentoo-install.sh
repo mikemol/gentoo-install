@@ -81,13 +81,14 @@ ETC_TIMEZONE="America/Detroit"
 
 KERNEL_SOURCES="sys-kernel/gentoo-sources"
 
-read -r -d '' ETC_CONFD_NET_FILE_CONTENT <<'EOF'
+ETC_CONFD_NET_FILE_CONTENT=$(cat <<'EOF'
 config_eth0="dhcp"
 EOF
+)
 
 #make.conf
 
-read -r -d '' MAKE_CONF <<'EOF'
+MAKE_CONF=$(cat <<'EOF'
 CFLAGS="-O2 -pipe -march=native -ggdb"
 CXXFLAGS="${CFLAGS}"
 
@@ -132,6 +133,7 @@ ACCEPT_LICENSE="AdobeFlash-10.3"
 
 CHOST="x86_64-pc-linux-gnu"
 EOF
+)
 
 logger "Gentoo install: Grabbing release and portage tarballs"
 
@@ -210,8 +212,7 @@ if [[ $? -ne 0 ]]; then exit 1; fi
 # we still want automation inside the chroot. So we build a second script to
 # run in there.
 
-read -r -d '' INNER_SCRIPT <<'INNERSCRIPT'
-
+INNER_SCRIPT=$(cat <<'INNERSCRIPT'
 env-update
 source /etc/profile
 export PS1="(autochroot) $PS1" # Not that the user will see this.
@@ -461,6 +462,7 @@ script_emerge app-admin/genlop sys-process/htop app-editors/vim app-portage/eix
 
 echo "SUCCESS!"
 INNERSCRIPT
+)
 
 echo "Preparing chroot script"
 
@@ -474,5 +476,6 @@ chroot /mnt/gentoo/ /bin/bash /chroot_inner_script.sh "$FS_ROOT_UUID" "$FS_BOOT_
 
 if [[ $? -ne 0 ]]; then
     echo "chroot install script failed. Read output, collect logs, submit bugs..."
+    echo "Which nobody bothered to do for six years. I guess we're bug free!"
 fi
 
