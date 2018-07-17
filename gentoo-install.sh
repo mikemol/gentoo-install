@@ -140,13 +140,13 @@ logger "Gentoo install: Grabbing release and portage tarballs"
 ROOTPATH="$MIRROR$MIRROR_BASE_PATH"
 
 STAGEFILEPATH="$ROOTPATH$STAGE_PATH$STAGE_BALL"
-if [[ ! -f $STAGE_BALL ]]; then
+if [ ! -f $STAGE_BALL ]; then
     wget "$STAGEFILEPATH"
 fi
 unset STAGEFILEPATH
 
 PORTAGEFILEPATH="$ROOTPATH$PORTAGE_PATH$PORTAGE_SNAPSHOT"
-if [[ ! -f $PORTAGE_SNAPSHOT ]]; then
+if [ ! -f $PORTAGE_SNAPSHOT ]; then
     wget "$PORTAGEFILEPATH"
 fi
 unset PORTAGEFILEPATH
@@ -204,9 +204,9 @@ echo "http_proxy=$http_proxy" > /mnt/gentoo/etc/env.d/02proxy
 logger "Gentoo install: Mounting dev, proc, etc in target environment"
 
 mount -t proc none /mnt/gentoo/proc
-if [[ $? -ne 0 ]]; then exit 1; fi
+if [ $? -ne 0 ]; then exit 1; fi
 mount --rbind /dev /mnt/gentoo/dev/
-if [[ $? -ne 0 ]]; then exit 1; fi
+if [ $? -ne 0 ]; then exit 1; fi
 
 # And that's everything we do *outside* the chroot.
 # we still want automation inside the chroot. So we build a second script to
@@ -238,7 +238,7 @@ script_fail() {
 }
 
 script_check_fail() {
-    if [[ $? -ne 0 ]]; then
+    if [ $? -ne 0 ]; then
         script_fail;
     else
        echo "Gentoo install: Cmd Succeeded"
@@ -324,13 +324,13 @@ script_emerge_post() {
 
     # Clean up anything which got broken by the emerge.
     hash python-updater 2> /dev/null
-    if [[ $? -eq 0 ]]; then
+    if [ $? -eq 0 ]; then
         logger "Gentoo install: python updater"
         python-updater
     fi
 
     hash python-updater 2> /dev/null
-    if [[ $? -eq 0 ]]; then
+    if [ $? -eq 0 ]; then
         logger "Gentoo install: perl updater"
         perl-cleaner --reallyall
     fi
@@ -356,7 +356,7 @@ script_emerge_retry() {
 
     logger "Gentoo install: emerge succeeded. Continuing"
 
-    if [[ $SER -ne 0 ]]; then
+    if [ $SER -ne 0 ]; then
         # Don't let our SER interfere with deeper SERs.
 	# We're done with it, anyhow.
         unset SER
@@ -474,7 +474,7 @@ echo "Running chroot script"
 # and run it. Wish us luck!
 chroot /mnt/gentoo/ /bin/bash /chroot_inner_script.sh "$FS_ROOT_UUID" "$FS_BOOT_UUID" "$FS_SWAP_UUID" "$FS_HOME_UUID" "$ETC_CONFD_HOSTNAME" "$ETC_CONFD_NET_FILE_CONTENT" "$http_proxy" "$KERNEL_SOURCES"
 
-if [[ $? -ne 0 ]]; then
+if [ $? -ne 0 ]; then
     echo "chroot install script failed. Read output, collect logs, submit bugs..."
     echo "Which nobody bothered to do for six years. I guess we're bug free!"
 fi
