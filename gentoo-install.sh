@@ -166,9 +166,7 @@ cp -L /etc/resolv.conf /mnt/gentoo/etc/resolv.conf
 logger "Gentoo install: Mounting dev, proc, etc in target environment"
 
 mount -t proc none /mnt/gentoo/proc
-if [ $? -ne 0 ]; then exit 1; fi
 mount --rbind /dev /mnt/gentoo/dev/
-if [ $? -ne 0 ]; then exit 1; fi
 
 # And that's everything we do *outside* the chroot.
 # we still want automation inside the chroot. So we build a second script to
