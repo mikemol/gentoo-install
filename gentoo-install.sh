@@ -152,7 +152,7 @@ tar xpf "$PORTAGE_SNAPSHOT" -C /mnt/gentoo/usr
 # use a lump make.conf I already use.
 logger "Gentoo install: Unpacking make.conf."
 
-echo "$MAKE_CONF" > /mnt/gentoo/etc/make.conf
+echo "$MAKE_CONF" > /mnt/gentoo/etc/portage/make.conf
 
 logger "Gentoo install: Writing timezone configuration"
 echo "$ETC_TIMEZONE" > /mnt/gentoo/etc/timezone
