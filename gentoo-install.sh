@@ -79,45 +79,24 @@ EOF
 
 #make.conf
 
-MAKE_CONF=$(cat <<'EOF'
+SYS_CPU_TGT="3"
+
+MAKE_CONF=$(cat <<EOF
 CFLAGS="-O2 -pipe -march=native -ggdb"
-CXXFLAGS="${CFLAGS}"
+CXXFLAGS="\${CFLAGS}"
 
-SYS_CPU_TGT="6"
-
-MAKEOPTS="--jobs --load=${SYS_CPU_TGT}"
-EMERGE_DEFAULT_OPTS="--jobs --load-average=${SYS_CPU_TGT} --verbose --tree --keep-going --with-bdeps=y"
+MAKEOPTS="--jobs=${SYS_CPU_TGT}"
+EMERGE_DEFAULT_OPTS="--jobs=${SYS_CPU_TGT} --verbose --tree --keep-going --with-bdeps=y"
 FEATURES="splitdebug"
 LINGUAS="en"
 
-SYS_USE_CPU="mmx sse sse2 sse3 ssse3 openmp opencl cuda posix nptl multilib smp lapack"
-SYS_USE_LANG="perl python"
-SYS_USE_TOOLKITS="gtk"
-SYS_USE_GAPI="gd sdl ncurses xcb opengl v4l vdpau xv X dri"
-SYS_USE_AAPI="openal alsa"
-SYS_USE_OTHER="acl alsa cdr crypt cups dvd dvdr firefox gmp iconv nsplugin offensive pcre pda rss spell taglib truetype videos vim-syntax xattr xcomposite xft xinerama xml xscreensaver fontconfig qt3support phonon"
-SYS_USE_COMPRESSION="bzip2 gzip lzma lzo szip zlib"
-SYS_USE_MEDIA_GFX="imagemagick jpeg jpeg2k openexr png raw svg tiff wmf mng"
-SYS_USE_MEDIA_AUDIO="aac cdda flac gsm lame mad mikmod shorten speex timidity vorbis mp3 midi"
-SYS_USE_MEDIA_VIDEO="css dv ffmpeg theora x264 xvid"
-SYS_USE_MEDIA_CONTAINERS="matroska mms mp4 mpeg ogg pdf quicktime vcd"
-SYS_USE_MEDIA="${SYS_USE_MEDIA_GFX} ${SYS_USE_MEDIA_AUDIO} ${SYS_USE_MEDIA_VIDEO} ${SYS_USE_MEDIA_CONTAINERS} sound cddb encode exif gimp libsamplerate mtp ppds sndfile sox wavpack xmp latex"
-
-SYS_USE_NET="avahi curl ftp geoip gnutls ipv6 libwww rdesktop samba sockets ssl tcpd vnc"
-SYS_USE_PLATFORM="acpi dbus fam hddtemp ieee1394 joystick libnotify lm_sensors pam readline sharedmem syslog sysvipc threads udev unicode usb"
-
-SYS_USE_DONOTWANT="-pulseaudio -gnome -oss -berkdb -gdbm"
-
-USE="${SYS_USE_CPU} ${SYS_USE_LANG} ${SYS_USE_TOOLKITS} ${SYS_USE_GAPI} ${SYS_USE_AAPI} ${SYS_USE_OTHER} ${SYS_USE_MEDIA} ${SYS_USE_COMPRESSION} ${SYS_USE_NET} ${SYS_USE_PLATFORM} ${SYS_USE_DONOTWANT}"
+USE="mmx sse sse2 sse3 ssse3 posix nptl smp avahi curl ipv6 acpi dbus hddtemp libnotify lm_sensors pam readline syslog udev unicode usb -gnome -oss -static"
 
 GENTOO_MIRRORS="http://chi-10g-1-mirror.fastsoft.net/pub/linux/gentoo/gentoo-distfiles/ http://mirrors.cs.wmich.edu/gentoo http://gentoo.mirrors.tds.net/gentoo"
 
-VIDEO_CARDS="nvidia"
+VIDEO_CARDS="intel"
 INPUT_DEVICES="evdev"
 ALSA_CARDS=""
-
-ACCEPT_LICENSE="AdobeFlash-10.3"
-# PORTAGE_BINHOST="http://binhost.ossdl.de/x86_64-pc-linux-gnu/"
 
 #PKGDIR="/mnt/r5/pkgdir"
 #PORTAGE_TMPDIR="/mnt/r5/portage_tmp"
