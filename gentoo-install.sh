@@ -159,9 +159,6 @@ echo "$ETC_TIMEZONE" > /mnt/gentoo/etc/timezone
 
 cp "/mnt/gentoo/usr/share/zoneinfo/$ETC_TIMEZONE" /mnt/gentoo/etc/localtime
 
-logger "Gentoo install: Adding rsync mirror"
-echo "SYNC=$SYNC" >> /mnt/gentoo/etc/make.conf
-
 logger "Gentoo install: Copying autodiscovered DNS details"
 
 cp -L /etc/resolv.conf /mnt/gentoo/etc/resolv.conf
