@@ -166,9 +166,6 @@ logger "Gentoo install: Copying autodiscovered DNS details"
 
 cp -L /etc/resolv.conf /mnt/gentoo/etc/resolv.conf
 
-logger "Gentoo install: Installing proxy details into install environment"
-echo "http_proxy=$http_proxy" > /mnt/gentoo/etc/env.d/02proxy
-
 logger "Gentoo install: Mounting dev, proc, etc in target environment"
 
 mount -t proc none /mnt/gentoo/proc
