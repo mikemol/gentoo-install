@@ -40,16 +40,7 @@
 # Patches very welcome.
 
 #Mirror for portage snapshot and stage3 tarball
-MIRROR=http://mirror.mcs.anl.gov/
-
-#Rsync mirror
-SYNC=rsync://wash.firefly.michael.mol.name/gentoo-portage
-
-#HTTP proxy
-http_proxy=http://wash.firefly.michael.mol.name:8123
-
-#Mirror base path
-MIRROR_BASE_PATH=pub/gentoo/
+MIRROR=http://lug.mtu.edu/gentoo/
 
 #stage 3 relative path
 STAGE_PATH=releases/amd64/current-stage3/
