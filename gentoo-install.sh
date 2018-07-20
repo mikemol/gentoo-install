@@ -268,7 +268,7 @@ script_conf_locales_select() {
 }
 
 script_conf_locales() {
-    script_conf_locales_write
+    script_conf_locale_gen_write
     locale-gen
     script_check_fail
 
