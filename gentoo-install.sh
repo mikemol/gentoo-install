@@ -290,15 +290,7 @@ script_emerge_post() {
     # These commands _may_ be harmful if run at the wrong time...but I've
     # tried to order them in a minimal-risk fashion.
 
-    # Clean up anything which got broken by the emerge.
-    hash python-updater 2> /dev/null
-    if [ $? -eq 0 ]; then
-        logger "Gentoo install: python updater"
-        python-updater
-    fi
-
-    hash python-updater 2> /dev/null
-    if [ $? -eq 0 ]; then
+    hash perl-cleaner 2> /dev/null
         logger "Gentoo install: perl updater"
         perl-cleaner --reallyall
     fi
@@ -395,8 +387,8 @@ script_em_sync
 # they'll be cleaned up as part of an emerge --depclean. Either way, we're
 # not putting them in our world file.
 
-logger "Gentoo install: One-shotting per-cleaner and python-updater"
-emerge -1 app-admin/perl-cleaner app-admin/python-updater
+logger "Gentoo install: One-shotting perl-cleaner"
+emerge -1 app-admin/perl-cleaner
 
 # We need this for revdep-rebuild, which we'll want _immediately_ after
 # updating portage.
