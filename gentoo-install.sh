@@ -168,6 +168,14 @@ logger "Gentoo install: Mounting dev, proc, etc in target environment"
 mount -t proc none /mnt/gentoo/proc
 mount --rbind /dev /mnt/gentoo/dev/
 
+if [ ! mountpoint -q /mnt/gentoo/dev/shm ] ; then
+	mount -t tmpfs none -o rw,nosuid,nodev,mode=1777 /dev/shm
+fi
+
+if [ ! mountpoint -q /mnt/gentoo/dev/pts ] ; then
+	mount -t devpts none -o rw,nosuid,noexec,relatime,gid=5,mode=620,ptmxmode=000 /mnt/gentoo/dev/pts
+fi
+
 # And that's everything we do *outside* the chroot.
 # we still want automation inside the chroot. So we build a second script to
 # run in there.
