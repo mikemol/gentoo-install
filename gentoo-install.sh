@@ -43,16 +43,16 @@
 MIRROR=http://lug.mtu.edu/gentoo/
 
 #stage 3 relative path
-STAGE_PATH=releases/amd64/current-stage3/
+STAGE_PATH=releases/amd64/autobuilds/current-stage3-amd64/
 
 #portage snapshot relative path
 PORTAGE_PATH=snapshots/
 
 #Stage3 tarball
-STAGE_BALL=stage3-amd64-20120621.tar.bz2
+STAGE_BALL=stage3-amd64-20180715T214502Z.tar.xz
 
 #Portage snapshot tarball
-PORTAGE_SNAPSHOT=portage-latest.tar.bz2
+PORTAGE_SNAPSHOT=portage-latest.tar.xz
 
 #Root filesystem device
 ROOTDEV=/dev/md127
