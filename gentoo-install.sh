@@ -141,11 +141,11 @@ mount "$ROOTDEV" -o nobarrier,max_batch_time=100000,data=writeback /mnt/gentoo
 
 logger "Gentoo Install: Unpacking the stage tarball"
 
-tar xjpf "$STAGE_BALL" -C /mnt/gentoo
+tar xpf "$STAGE_BALL" -C /mnt/gentoo
 
 logger "Gentoo install: Unpacking the portage snapshot."
 
-tar xjpf "$PORTAGE_SNAPSHOT" -C /mnt/gentoo/usr
+tar xpf "$PORTAGE_SNAPSHOT" -C /mnt/gentoo/usr
 
 
 # Another deviation. Rather than assemble make.conf the Handbook way, we'll
