@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash -e
 
 # Copyright (c) 2012, Michael Mol <mikemol@gmail.com>
 # All rights reserved.
