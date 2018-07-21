@@ -55,7 +55,7 @@ STAGE_BALL=stage3-amd64-20180715T214502Z.tar.xz
 PORTAGE_SNAPSHOT=portage-latest.tar.xz
 
 #Root filesystem device
-ROOTDEV=/dev/md127
+ROOTDEV=/dev/sda4
 
 #Boot filesystem UUID
 FS_BOOT_UUID=3d43226b-ff73-4369-829c-bd5cf90b3063
@@ -124,7 +124,7 @@ unset ROOTPATH
 logger "Gentoo install: Creating the filesystem"
 
 #Create the filesystem
-mkfs.ext4 -F "$ROOTDEV"
+mkfs.ext4 -F -E discard -O sparse_super2 "$ROOTDEV"
 
 logger "Gentoo install: Extracting the root filesystem's UUID."
 FS_ROOT_UUID=$(tune2fs -l "$ROOTDEV"|grep "Filesystem UUID"|cut -f2 -d:|sed -e 's/ \+//')
@@ -134,7 +134,7 @@ logger "Gentoo install: Mounting the filesystem"
 # mount the root filesystem. We're going to play fast and loose with integrity,
 # but it'll be OK as long as things don't crash before the script finishes. And
 # if they do, we just run the script again.
-mount "$ROOTDEV" -o nobarrier,max_batch_time=100000,data=writeback /mnt/gentoo
+mount "$ROOTDEV" -o nobarrier,noatime,discard,max_batch_time=100000,data=writeback /mnt/gentoo
 
 # Here, we deviate from the handbook; we'll mount /boot once we're chrooted.
 # Instead, we go ahead and unpack our tarballs.
@@ -222,10 +222,9 @@ script_write_fstab() {
     # Clear out what's already there, first.
     echo "" > /etc/fstab
 
-    echo "UUID=$FS_BOOT_UUID\t/boot\text4\tdefaults,noatime\t1\t2" >> /etc/fstab
-    echo "UUID=$FS_SWAP_UUID\tnone\tswap\tsw\t0\t0" >> /etc/fstab
-    echo "UUID=$FS_ROOT_UUID\t/\text4\tnoatime\t0\t1" >> /etc/fstab
-    echo "UUID=$FS_HOME_UUID\t/home\text4\tnoatime\t0\t1" >> /etc/fstab
+    echo "UUID=$FS_BOOT_UUID\t/boot\text4\tdefaults,noatime,discard\t1\t2" >> /etc/fstab
+    echo "UUID=$FS_SWAP_UUID\tnone\tswap\tdefaults,discard\t0\t0" >> /etc/fstab
+    echo "UUID=$FS_ROOT_UUID\t/\text4\tnoatime,discard\t0\t1" >> /etc/fstab
     echo "/dev/cdrom\t/mnt/cdrom\tauto\tuser,noauto\t0\t0" >> /etc/fstab
 }
 
