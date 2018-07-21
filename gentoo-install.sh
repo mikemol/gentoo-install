@@ -68,6 +68,8 @@ ETC_TIMEZONE="America/Detroit"
 
 KERNEL_SOURCES="sys-kernel/gentoo-sources"
 
+PROFILE='desktop/plasma/systemd (stable)'
+
 ETC_CONFD_NET_FILE_CONTENT=$(cat <<'EOF'
 config_eth0="dhcp"
 EOF
@@ -386,6 +388,10 @@ logger "Gentoo install: Installing kernel-sources"
 emerge $KERNEL_SOURCES
 
 script_emerge_update_world
+
+# Now let's set the profile we want
+profile_no=\$(eselect profile list | grep '$PROFILE' | tail -n1 | cut -d'[' -f2 | cut -d']' -f1)
+eselect profile set \$profile_no
 
 # Since we're rebasing the system with new CFLAGS, and _then_ rebuilding
 # the _entire_ system twice to make sure we got everything, it's almost
