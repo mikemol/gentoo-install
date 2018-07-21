@@ -57,12 +57,8 @@ PORTAGE_SNAPSHOT=portage-latest.tar.xz
 #Root filesystem device
 ROOTDEV=/dev/sda4
 
-#Boot filesystem UUID
-FS_BOOT_UUID=3d43226b-ff73-4369-829c-bd5cf90b3063
-#Swap filesystem UUID
-FS_SWAP_UUID=f2a33afa-8d3c-4b57-849f-41fc03210b59
-#home filesystem UUID
-FS_HOME_UUID=d7c17623-255b-4313-b50b-99f0f79a0681
+FS_BOOT_UUID=3c2398d1-c84a-425d-b35b-63841188ff01
+FS_SWAP_UUID=cf048d96-2455-4dbd-bda1-5a0931897a6f
 #assigned later
 FS_ROOT_UUID=""
 
