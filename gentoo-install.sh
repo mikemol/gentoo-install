@@ -180,23 +180,13 @@ fi
 # we still want automation inside the chroot. So we build a second script to
 # run in there.
 
-INNER_SCRIPT=$(cat <<'INNERSCRIPT'
+INNER_SCRIPT=$(cat <<INNERSCRIPT
 env-update
 source /etc/profile
-export PS1="(autochroot) $PS1" # Not that the user will see this.
+export PS1="(autochroot) \$PS1" # Not that the user will see this.
 
 # Is there any reason the handbook specifies anything but emerges to be done
 # _after_ the chroot?
-
-# Extract data passed to us from the pre-chroot script.
-FS_ROOT_UUID="$1"
-FS_BOOT_UUID="$2"
-FS_SWAP_UUID="$3"
-FS_HOME_UUID="$4"
-ETC_CONFD_HOSTNAME="$5"
-ETC_CONFD_NET_FILE_CONTENT="$6"
-http_proxy="$7"
-KERNEL_SOURCES="$8"
 
 script_fail() {
     logger "Gentoo install: Failing out"
@@ -206,7 +196,7 @@ script_fail() {
 }
 
 script_check_fail() {
-    if [ $? -ne 0 ]; then
+    if [ \$? -ne 0 ]; then
         script_fail;
     else
        echo "Gentoo install: Cmd Succeeded"
@@ -291,6 +281,7 @@ script_emerge_post() {
     # tried to order them in a minimal-risk fashion.
 
     hash perl-cleaner 2> /dev/null
+    if [ \$? -eq 0 ]; then
         logger "Gentoo install: perl updater"
         perl-cleaner --reallyall
     fi
@@ -308,7 +299,7 @@ script_emerge_post() {
 script_emerge_retry() {
     # Keep trying until we've got it!
     SER=0
-    while test $? -ne 0; do
+    while test \$? -ne 0; do
         logger "Gentoo install: emerge failed. Retry."
         emerge --resume
         SER=1
@@ -316,7 +307,7 @@ script_emerge_retry() {
 
     logger "Gentoo install: emerge succeeded. Continuing"
 
-    if [ $SER -ne 0 ]; then
+    if [ \$SER -ne 0 ]; then
         # Don't let our SER interfere with deeper SERs.
 	# We're done with it, anyhow.
         unset SER
@@ -351,8 +342,8 @@ script_emerge_rebuild_world() {
 }
 
 script_emerge() {
-    logger "Gentoo install: emerging $*"
-    emerge $*
+    logger "Gentoo install: emerging \$*"
+    emerge \$*
     script_emerge_retry
 }
 
