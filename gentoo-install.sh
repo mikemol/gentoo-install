@@ -62,7 +62,7 @@ FS_SWAP_UUID=cf048d96-2455-4dbd-bda1-5a0931897a6f
 #assigned later
 FS_ROOT_UUID=""
 
-ETC_CONFD_HOSTNAME="inara"
+ETC_CONFD_HOSTNAME="saffron"
 
 ETC_TIMEZONE="America/Detroit"
 
