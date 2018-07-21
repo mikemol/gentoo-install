@@ -406,7 +406,7 @@ script_emerge_rebuild_world
 script_emerge app-admin/syslog-ng sys-process/vixie-cron net-misc/openssh net-misc/dhcpcd sys-apps/mlocate
 rc-update add syslog-ng default
 rc-update add vixie-cron default
-rc-update add ssh default
+rc-update add sshd default
 
 # And not-so-necessary-but-oh-so-nice tools.
 script_emerge app-admin/genlop sys-process/htop app-editors/vim app-portage/eix
