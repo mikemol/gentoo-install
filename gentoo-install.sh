@@ -404,7 +404,7 @@ rc-update add vixie-cron default
 rc-update add sshd default
 
 # And not-so-necessary-but-oh-so-nice tools.
-script_emerge app-admin/genlop sys-process/htop app-editors/vim app-portage/eix
+script_emerge app-admin/genlop sys-process/htop app-portage/eix
 
 echo "SUCCESS!"
 INNERSCRIPT
